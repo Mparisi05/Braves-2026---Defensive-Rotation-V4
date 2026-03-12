@@ -1144,7 +1144,7 @@ function exportPrint() {
     const rowBg = isBench ? '#fffcf0' : (rowIdx % 2 === 0 ? '#fff' : '#f5f6f7');
     const labelColor = isBench ? '#b48a14' : '#25282a';
     const labelStyle = isBench ? 'font-style:italic;' : '';
-    const rowHeight = isBench ? '' : 'height:52px;';
+    const rowHeight = isBench ? '' : 'height:36px;';
  
     let cells = `<td style="padding:6px 8px;font-weight:700;font-size:11px;color:${labelColor};background:${rowBg};border-bottom:1px solid #ddd;white-space:nowrap;vertical-align:top;${labelStyle}${rowHeight}">${label}</td>`;
  
@@ -1162,7 +1162,7 @@ function exportPrint() {
  
       if (!isBench) {
         // Add a dotted write-in line below the player chip
-        const writeLine = `<div style="margin-top:6px;border-bottom:1px dotted #bbb;height:1px;width:85%;margin-left:auto;margin-right:auto;"></div>`;
+        const writeLine = `<div style="margin-top:4px;border-bottom:1px dotted #bbb;height:1px;width:85%;margin-left:auto;margin-right:auto;"></div>`;
         cells += `<td style="padding:4px 3px;text-align:center;background:${rowBg};border-bottom:1px solid #ddd;vertical-align:top;${rowHeight}">${cellContent}${writeLine}</td>`;
       } else {
         cells += `<td style="padding:4px 3px;text-align:center;background:${rowBg};border-bottom:1px solid #ddd;">${cellContent}</td>`;
@@ -1177,15 +1177,6 @@ function exportPrint() {
   for (let i = 0; i < INNINGS; i++) {
     headerCells += `<th style="padding:8px 6px;text-align:center;font-size:10px;color:#fff;background:#0057b8;">INNING ${i+1}</th>`;
   }
- 
-  // Player summary
-  let summaryHtml = '';
-  ap.forEach(player => {
-    const inn = getPlayerInnings(player);
-    const sitting = getPlayerSitting(player);
-    const sitsStr = sitting.length > 0 ? `sits: ${sitting.map(s=>s+1).join(', ')}` : 'plays all';
-    summaryHtml += `<span style="display:inline-block;margin:2px 12px 2px 0;font-size:9px;"><strong>${player}</strong>: ${inn} inn (${sitsStr})</span>`;
-  });
  
   // Absent
   let absentHtml = '';
@@ -1224,10 +1215,6 @@ function exportPrint() {
     <thead><tr>${headerCells}</tr></thead>
     <tbody>${tableRows}</tbody>
   </table>
-  <div style="margin-top:12px;">
-    <div style="font-size:10px;font-weight:700;color:#25282a;margin-bottom:4px;">PLAYER SUMMARY</div>
-    <div>${summaryHtml}</div>
-  </div>
 </body>
 </html>`;
  
